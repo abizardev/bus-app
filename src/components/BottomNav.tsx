@@ -37,8 +37,8 @@ export const BottomNav: React.FC<BottomNavProps> = ({
   ];
 
   return (
-    <nav className="fixed bottom-0 left-0 right-0 z-40 bg-white border-t border-slate-200 max-w-md mx-auto shadow-[0_-4px_20px_rgba(0,0,0,0.03)]">
-      <div className="grid grid-cols-4 h-16 items-center px-2">
+    <nav aria-label="Navigasi utama" className="fixed bottom-0 left-0 right-0 z-40 bg-white/90 backdrop-blur-md border-t border-slate-200 max-w-md mx-auto pb-[env(safe-area-inset-bottom)]">
+      <div className="grid grid-cols-4 min-h-[64px] items-center px-2">
         {tabs.map((tab) => {
           const Icon = tab.icon;
           const isActive = currentTab === tab.id;
@@ -47,32 +47,32 @@ export const BottomNav: React.FC<BottomNavProps> = ({
             <button
               key={tab.id}
               onClick={() => onSelectTab(tab.id)}
-              className={`relative flex flex-col items-center justify-center py-1 transition-all group cursor-pointer ${
-                isActive ? 'text-black font-bold' : 'text-slate-400 hover:text-slate-800'
+              aria-current={isActive ? 'page' : undefined}
+              aria-label={tab.id === 'etiket' && tab.badge ? `${tab.label}, ${tab.badge} tiket aktif` : tab.label}
+              className={`relative flex flex-col items-center justify-center min-h-[56px] py-1.5 transition-all cursor-pointer focus-visible:outline-2 focus-visible:outline-black rounded-xl ${
+                isActive ? 'text-black font-bold' : 'text-slate-500 hover:text-slate-900'
               }`}
             >
               <div className="relative">
                 <Icon
-                  className={`w-5 h-5 transition-transform duration-200 ${
-                    isActive ? 'scale-110 stroke-[2.5] text-black' : 'stroke-[1.8] group-hover:scale-105'
+                  className={`w-6 h-6 transition-transform duration-200 ${
+                    isActive ? 'scale-110 text-black fill-current' : 'group-hover:scale-105'
                   }`}
+                  aria-hidden="true"
                 />
-                {tab.badge && tab.badge > 0 && tab.id === 'etiket' && !isActive && (
-                  <span className="absolute -top-1 -right-2 w-2 h-2 rounded-full bg-black" />
+                {tab.badge && tab.badge > 0 && tab.id === 'etiket' && (
+                  <span className="absolute -top-1.5 -right-3 min-w-[18px] h-[18px] px-1 rounded-full bg-red-600 text-white text-[11px] font-bold flex items-center justify-center">
+                    {tab.badge}
+                  </span>
                 )}
               </div>
               <span
-                className={`text-[11px] font-heading mt-1 tracking-tight transition-colors ${
-                  isActive ? 'font-bold text-black' : 'font-medium text-slate-500'
+                className={`text-[12px] mt-0.5 tracking-tight transition-colors ${
+                  isActive ? 'font-bold text-black' : 'font-medium text-slate-600'
                 }`}
               >
                 {tab.label}
               </span>
-
-              {/* Active solid black indicator pip */}
-              {isActive && (
-                <span className="absolute bottom-0 w-8 h-[2.5px] bg-black rounded-full" />
-              )}
             </button>
           );
         })}

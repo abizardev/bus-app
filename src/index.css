@@ -18,7 +18,29 @@
   }
 }
 
-/* Diagonal hatch pattern for occupied bus seats */
+/* Diagonal hatch pattern for occupied bus seats (Neon & Dark style) */
+.seat-hatched {
+  background-color: rgba(162, 222, 28, 0.45);
+  background-image: repeating-linear-gradient(
+    -45deg,
+    rgba(35, 60, 5, 0.35),
+    rgba(35, 60, 5, 0.35) 2.5px,
+    transparent 2.5px,
+    transparent 5.5px
+  );
+}
+
+.driver-hatched {
+  background-color: transparent;
+  background-image: repeating-linear-gradient(
+    -45deg,
+    rgba(35, 60, 5, 0.45),
+    rgba(35, 60, 5, 0.45) 2px,
+    transparent 2px,
+    transparent 6px
+  );
+}
+
 .bg-hatch-pattern {
   background-image: repeating-linear-gradient(
     -45deg,
@@ -66,4 +88,27 @@
 }
 ::-webkit-scrollbar-thumb:hover {
   background: #000000;
+}
+
+/* Apple HIG fondasi: fokus terlihat, hormati reduced motion/transparency */
+:focus-visible {
+  outline: 2px solid #000000;
+  outline-offset: 2px;
+}
+
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+.no-scrollbar {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    transition-duration: 0.01ms !important;
+  }
 }

@@ -36,7 +36,7 @@ export const Header: React.FC<HeaderProps> = ({ currentTab, onNavigateTab, unrea
 
   return (
     <>
-      <header className="sticky top-0 z-40 bg-white px-5 py-3.5 flex items-center justify-between border-b border-slate-200">
+      <header className="sticky top-0 z-40 bg-white/90 backdrop-blur-md px-5 py-3 flex items-center justify-between border-b border-slate-200">
         {/* Left: Brand Icon + Title */}
         <div 
           onClick={() => onNavigateTab('jadwal')}
@@ -49,8 +49,8 @@ export const Header: React.FC<HeaderProps> = ({ currentTab, onNavigateTab, unrea
             <span className="font-heading font-bold text-lg text-black leading-tight tracking-tight">
               OmniBus
             </span>
-            <span className="text-[10px] text-slate-500 font-medium">
-              Tiket Bus Antarkota
+            <span className="text-[11px] text-slate-600 font-medium">
+              Tiket bus antarkota
             </span>
           </div>
         </div>
@@ -60,12 +60,14 @@ export const Header: React.FC<HeaderProps> = ({ currentTab, onNavigateTab, unrea
           {/* Notification Button */}
           <button
             onClick={() => setShowNotifications(true)}
-            className="relative w-9 h-9 rounded-full bg-white border border-slate-200 flex items-center justify-center text-slate-700 hover:border-black hover:text-black transition-all cursor-pointer shadow-xs"
-            aria-label="Notifikasi"
+            className="relative w-11 h-11 rounded-full bg-white border border-slate-200 flex items-center justify-center text-slate-700 hover:border-slate-400 hover:text-black transition-all cursor-pointer focus-visible:outline-2 focus-visible:outline-black"
+            aria-label={unreadCount > 0 ? `Notifikasi, ${unreadCount} belum dibaca` : 'Notifikasi'}
           >
-            <Bell className="w-4 h-4" />
+            <Bell className="w-5 h-5" aria-hidden="true" />
             {unreadCount > 0 && (
-              <span className="absolute top-2 right-2 w-2 h-2 rounded-full bg-black" />
+              <span className="absolute top-1.5 right-1.5 min-w-[18px] h-[18px] px-1 rounded-full bg-red-600 text-white text-[11px] font-bold flex items-center justify-center">
+                {unreadCount}
+              </span>
             )}
           </button>
         </div>
