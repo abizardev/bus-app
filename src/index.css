@@ -1,0 +1,77 @@
+@import "tailwindcss";
+
+@layer base {
+  :root {
+    --font-space: 'Space Grotesk', -apple-system, BlinkMacSystemFont, sans-serif;
+    --font-jakarta: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+  }
+  
+  body {
+    font-family: var(--font-jakarta);
+    background-color: #0b100c;
+    color: #dee4db;
+    overflow-x: hidden;
+  }
+
+  h1, h2, h3, h4, .font-heading {
+    font-family: var(--font-space);
+  }
+}
+
+/* Diagonal hatch pattern for occupied bus seats */
+.bg-hatch-pattern {
+  background-image: repeating-linear-gradient(
+    -45deg,
+    rgba(255, 255, 255, 0.15),
+    rgba(255, 255, 255, 0.15) 3px,
+    transparent 3px,
+    transparent 6px
+  );
+}
+
+.bg-hatch-pattern-lime {
+  background-image: repeating-linear-gradient(
+    -45deg,
+    rgba(27, 43, 21, 0.4),
+    rgba(27, 43, 21, 0.4) 3px,
+    transparent 3px,
+    transparent 6px
+  );
+}
+
+/* Ticket edge cutouts */
+.ticket-scallop-left {
+  position: absolute;
+  left: -14px;
+  width: 28px;
+  height: 28px;
+  border-radius: 9999px;
+  background-color: #0b100c;
+  z-index: 10;
+}
+
+.ticket-scallop-right {
+  position: absolute;
+  right: -14px;
+  width: 28px;
+  height: 28px;
+  border-radius: 9999px;
+  background-color: #0b100c;
+  z-index: 10;
+}
+
+/* Custom scrollbars */
+::-webkit-scrollbar {
+  width: 5px;
+  height: 5px;
+}
+::-webkit-scrollbar-track {
+  background: #0b100c;
+}
+::-webkit-scrollbar-thumb {
+  background: #1f2a21;
+  border-radius: 4px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #bef237;
+}

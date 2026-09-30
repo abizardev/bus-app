@@ -1,0 +1,6 @@
+{
+  "name": "OmniBus - Tiket Bus Antarkota",
+  "description": "Aplikasi pemesanan tiket bus antarkota modern dengan jadwal real-time, pemilihan kursi interaktif, dan e-tiket instan.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
