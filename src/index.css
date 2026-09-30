@@ -8,8 +8,8 @@
   
   body {
     font-family: var(--font-jakarta);
-    background-color: #0b100c;
-    color: #dee4db;
+    background-color: #ffffff;
+    color: #000000;
     overflow-x: hidden;
   }
 
@@ -22,18 +22,8 @@
 .bg-hatch-pattern {
   background-image: repeating-linear-gradient(
     -45deg,
-    rgba(255, 255, 255, 0.15),
-    rgba(255, 255, 255, 0.15) 3px,
-    transparent 3px,
-    transparent 6px
-  );
-}
-
-.bg-hatch-pattern-lime {
-  background-image: repeating-linear-gradient(
-    -45deg,
-    rgba(27, 43, 21, 0.4),
-    rgba(27, 43, 21, 0.4) 3px,
+    rgba(0, 0, 0, 0.12),
+    rgba(0, 0, 0, 0.12) 3px,
     transparent 3px,
     transparent 6px
   );
@@ -46,7 +36,8 @@
   width: 28px;
   height: 28px;
   border-radius: 9999px;
-  background-color: #0b100c;
+  background-color: #ffffff;
+  border-right: 1px solid #e2e8f0;
   z-index: 10;
 }
 
@@ -56,7 +47,8 @@
   width: 28px;
   height: 28px;
   border-radius: 9999px;
-  background-color: #0b100c;
+  background-color: #ffffff;
+  border-left: 1px solid #e2e8f0;
   z-index: 10;
 }
 
@@ -66,12 +58,12 @@
   height: 5px;
 }
 ::-webkit-scrollbar-track {
-  background: #0b100c;
+  background: #ffffff;
 }
 ::-webkit-scrollbar-thumb {
-  background: #1f2a21;
+  background: #cbd5e1;
   border-radius: 4px;
 }
 ::-webkit-scrollbar-thumb:hover {
-  background: #bef237;
+  background: #000000;
 }

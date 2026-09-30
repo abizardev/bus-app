@@ -37,7 +37,7 @@ export const BottomNav: React.FC<BottomNavProps> = ({
   ];
 
   return (
-    <nav className="fixed bottom-0 left-0 right-0 z-40 bg-[#0b100c]/95 backdrop-blur-lg border-t border-[#1b251d] max-w-md mx-auto">
+    <nav className="fixed bottom-0 left-0 right-0 z-40 bg-white border-t border-slate-200 max-w-md mx-auto shadow-[0_-4px_20px_rgba(0,0,0,0.03)]">
       <div className="grid grid-cols-4 h-16 items-center px-2">
         {tabs.map((tab) => {
           const Icon = tab.icon;
@@ -47,31 +47,31 @@ export const BottomNav: React.FC<BottomNavProps> = ({
             <button
               key={tab.id}
               onClick={() => onSelectTab(tab.id)}
-              className={`relative flex flex-col items-center justify-center py-1 transition-all group ${
-                isActive ? 'text-[#bef237]' : 'text-[#8e9b90] hover:text-[#c4c9af]'
+              className={`relative flex flex-col items-center justify-center py-1 transition-all group cursor-pointer ${
+                isActive ? 'text-black font-bold' : 'text-slate-400 hover:text-slate-800'
               }`}
             >
               <div className="relative">
                 <Icon
                   className={`w-5 h-5 transition-transform duration-200 ${
-                    isActive ? 'scale-110 stroke-[2.4]' : 'stroke-[1.8] group-hover:scale-105'
+                    isActive ? 'scale-110 stroke-[2.5] text-black' : 'stroke-[1.8] group-hover:scale-105'
                   }`}
                 />
                 {tab.badge && tab.badge > 0 && tab.id === 'etiket' && !isActive && (
-                  <span className="absolute -top-1 -right-2 w-2 h-2 rounded-full bg-[#bef237]" />
+                  <span className="absolute -top-1 -right-2 w-2 h-2 rounded-full bg-black" />
                 )}
               </div>
               <span
                 className={`text-[11px] font-heading mt-1 tracking-tight transition-colors ${
-                  isActive ? 'font-bold text-[#bef237]' : 'font-medium text-[#8e9b90]'
+                  isActive ? 'font-bold text-black' : 'font-medium text-slate-500'
                 }`}
               >
                 {tab.label}
               </span>
 
-              {/* Active subtle bottom neon pip */}
+              {/* Active solid black indicator pip */}
               {isActive && (
-                <span className="absolute bottom-0 w-8 h-[2px] bg-[#bef237] rounded-full shadow-[0_0_8px_#bef237]" />
+                <span className="absolute bottom-0 w-8 h-[2.5px] bg-black rounded-full" />
               )}
             </button>
           );
