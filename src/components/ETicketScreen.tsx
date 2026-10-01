@@ -1,29 +1,72 @@
 import React, { useState } from 'react';
-import { 
-  Bus, 
-  Download, 
-  Share2, 
-  Navigation, 
-  Luggage, 
-  CheckCircle2, 
-  X, 
-  Copy, 
+import {
+  Bus,
+  Download,
+  Share2,
+  Navigation,
+  Luggage,
+  CheckCircle2,
+  X,
+  Copy,
   ExternalLink,
   Clock,
-  Printer
+  Printer,
+  Ticket as TicketIcon,
 } from 'lucide-react';
 import { ETicket } from '../data/mockData';
+import { getEmptyTicketMessage } from '../services/bookingFlow';
 
 interface ETicketScreenProps {
-  ticket: ETicket;
+  ticket: ETicket | null;
+  onBrowseSchedule?: () => void;
 }
 
-export const ETicketScreen: React.FC<ETicketScreenProps> = ({ ticket }) => {
+export const ETicketScreen: React.FC<ETicketScreenProps> = ({ ticket, onBrowseSchedule }) => {
   const [showPdfModal, setShowPdfModal] = useState(false);
   const [showShareModal, setShowShareModal] = useState(false);
   const [showTerminalModal, setShowTerminalModal] = useState(false);
   const [copiedLink, setCopiedLink] = useState(false);
   const [downloadSuccess, setDownloadSuccess] = useState(false);
+
+  // Database tiket masih kosong: belum ada tiket karena user belum bayar / belum login.
+  if (!ticket) {
+    return (
+      <div className="pb-28 pt-2 px-4 max-w-md mx-auto space-y-4">
+        <div className="pt-1">
+          <div className="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full bg-white border border-slate-300 text-xs font-heading font-bold text-slate-500 tracking-wider mb-1.5">
+            <span className="w-2 h-2 rounded-full bg-slate-300" />
+            <span>BELUM ADA TIKET</span>
+          </div>
+          <h1 className="font-heading font-bold text-2xl text-black tracking-tight">
+            E-Tiket Bus
+          </h1>
+          <p className="text-xs text-slate-500 mt-0.5" data-testid="empty-ticket-message">
+            {getEmptyTicketMessage()}
+          </p>
+        </div>
+
+        <div
+          data-testid="empty-ticket-state"
+          className="p-8 rounded-3xl bg-white border border-dashed border-slate-300 text-center space-y-3"
+        >
+          <div className="w-14 h-14 rounded-2xl bg-slate-50 border border-slate-200 flex items-center justify-center mx-auto text-slate-400">
+            <TicketIcon className="w-7 h-7" />
+          </div>
+          <p className="font-heading font-bold text-base text-black">Tiket kamu masih kosong</p>
+          <p className="text-xs text-slate-500 leading-relaxed">
+            Pilih jadwal → pilih kursi → isi data tiket → Lanjutkan Pembayaran (dummy) → tiket terbit di sini.
+            Kamu harus login / punya akun dulu.
+          </p>
+          <button
+            onClick={onBrowseSchedule}
+            className="mt-1 px-6 py-3 rounded-full bg-black text-white text-xs font-heading font-bold cursor-pointer active:scale-95"
+          >
+            Cari Jadwal Bus
+          </button>
+        </div>
+      </div>
+    );
+  }
 
   const handleCopyLink = () => {
     navigator.clipboard?.writeText?.(window.location.href);

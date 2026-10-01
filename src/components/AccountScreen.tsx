@@ -19,9 +19,21 @@ import { INITIAL_USER, TRAVEL_HISTORY, TravelHistoryItem } from '../data/mockDat
 
 interface AccountScreenProps {
   onNavigateTab: (tab: 'jadwal' | 'kursi' | 'etiket' | 'akun') => void;
+  isLoggedIn?: boolean;
+  ticketCount?: number;
+  loginNotice?: string | null;
+  onLogin?: () => void;
+  onLogout?: () => void;
 }
 
-export const AccountScreen: React.FC<AccountScreenProps> = ({ onNavigateTab }) => {
+export const AccountScreen: React.FC<AccountScreenProps> = ({
+  onNavigateTab,
+  isLoggedIn = true,
+  ticketCount = 0,
+  loginNotice = null,
+  onLogin,
+  onLogout,
+}) => {
   const [departureAlerts, setDepartureAlerts] = useState<boolean>(true);
   const [selectedReceipt, setSelectedReceipt] = useState<TravelHistoryItem | null>(null);
   const [showVouchersModal, setShowVouchersModal] = useState<boolean>(false);
@@ -40,6 +52,29 @@ export const AccountScreen: React.FC<AccountScreenProps> = ({ onNavigateTab }) =
 
   return (
     <div className="pb-28 pt-3 px-4 max-w-md mx-auto space-y-4">
+      {loginNotice && (
+        <p role="alert" data-testid="login-notice" className="p-3 rounded-2xl bg-amber-50 border border-amber-200 text-[12px] text-amber-800">
+          {loginNotice} Silakan masuk / daftar akun dulu.
+        </p>
+      )}
+      {!isLoggedIn && (
+        <div data-testid="logged-out-state" className="p-4 rounded-3xl bg-white border border-dashed border-slate-300 text-center space-y-2">
+          <p className="font-heading font-bold text-base text-black">Kamu belum login</p>
+          <p className="text-xs text-slate-500">E-tiket butuh akun. Masuk untuk menerbitkan & melihat tiket.</p>
+          <button
+            data-testid="login-button"
+            onClick={() => onLogin?.()}
+            className="px-6 py-2.5 rounded-full bg-black text-white text-xs font-heading font-bold cursor-pointer"
+          >
+            Masuk / Daftar (Dummy)
+          </button>
+        </div>
+      )}
+      <div className="flex items-center gap-2 text-xs" data-testid="account-ticket-count">
+        <span className="px-2.5 py-0.5 rounded-full bg-white border border-slate-300 font-bold text-black">
+          {isLoggedIn ? `Login • ${ticketCount} e-tiket di database` : 'Logged out • 0 e-tiket terlihat'}
+        </span>
+      </div>
       {/* 1. Profile VIP Card (Pure White with Crisp Black Border) */}
       <div className="p-4 rounded-3xl bg-white border border-slate-200 shadow-xs space-y-3">
         <div className="flex items-center gap-3.5">
@@ -607,7 +642,7 @@ export const AccountScreen: React.FC<AccountScreenProps> = ({ onNavigateTab }) =
                 Batal
               </button>
               <button
-                onClick={() => setShowLogoutConfirm(false)}
+                onClick={() => { setShowLogoutConfirm(false); onLogout?.(); }}
                 className="flex-1 py-2.5 rounded-xl bg-white border border-black text-black text-xs font-bold shadow-xs cursor-pointer hover:bg-slate-50"
               >
                 Keluar
